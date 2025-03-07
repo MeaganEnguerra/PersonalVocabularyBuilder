@@ -16,12 +16,12 @@ namespace PersonalVocabularyBuilder
             string name = "meagan";
             List<string> listedWords = new List<string>();
             
-            var option = new string[5];
+            var option = new string[4];
             option[0] = "Press (1) if you want to ADD A NEW VOCABULARY";
             option[1] = "Press (2) if you want to VIEW ALL VOCABULARY";
-            option[2] = "Press (3) if you want to EDIT A CERTAIN VOCABULARY";
-            option[3] = "Press (4) if you want to DELETE A CERTAIN VOCABULARY";
-            option[4] = "Press (5) if you want to go BACK TO MENU";
+            option[2] = "Press (3) if you want to DELETE ALL VOCABULARY";
+            option[3] = "Press (4) if you want to EXIT";
+           
 
 
             Console.WriteLine("Please enter your username to access this application.");

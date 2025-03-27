@@ -1,113 +1,165 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace PersonalVocabularyBuilder
 {
     internal class Program
     {
+        static List<string> vocabularies = new List<string>();
+        static string[] myOption =
+        {
+            "Press (1) to ADD A NEW VOCABULARY",
+            "Press (2) to VIEW ALL VOCABULARY",
+            "Press (3) to DELETE A CERTAIN VOCABULARY",
+            "Press (4) to EXIT"
+        };
 
         static void Main(string[] args)
         {
-
             string name = "meagan";
-            List<string> vocabularies = new List<string>();
 
             Console.WriteLine("Welcome to your Personal Vocabulary Builder!");
-            Console.WriteLine("A simple app that helps u to list and manage your vocabulary.\n");
+            Console.WriteLine("A simple app that helps you list and manage your vocabulary.\n");
 
-            Console.Write("Enter ur username: ");
+            Console.Write("Enter your username: ");
             string userName = Console.ReadLine();
 
             if (userName == name)
             {
-                Console.WriteLine("Hello, meagan! What do u want to do? \n");
-                var myOption = new string[4];
-                myOption[0] = "Press (1) if you want to ADD A NEW VOCABULARY";
-                myOption[1] = "Press (2) if you want to VIEW ALL VOCABULARY";
-                myOption[2] = "Press (3) if you want to DELETE A CERTAIN VOCABULARY";
-                myOption[3] = "Press (4) if you want to EXIT";
+                Console.WriteLine("\nHello, Meagan! What do you want to do?\n");
+                Option();
+                int userOption = GetUserInput();
 
-
-                string options;
-                do
+                while (userOption != 4) 
                 {
-                    Console.WriteLine("Press number 1 to 4 to get started: \n");
-                    foreach (var selectedChoice in myOption)
+
+
+                    switch (userOption)
                     {
-                        Console.WriteLine(selectedChoice);
+                        case 1:
+                            AddWord();
+                            break;
+
+                        case 2:
+                            ViewWord();
+                            break;
+
+                        case 3:
+                            RemoveWord();
+                            break;
+
+                        case 4:
+
+                            return; 
+
+                        default:
+                            Console.WriteLine("\nInvalid option. Please select a valid number (1-4).\n");
+                            break;
                     }
+                    Option();
+                    userOption = GetUserInput();
 
-                    options = Console.ReadLine();
-
-                    if (options == "1")
-                    {
-                        string add;
-                        do
-                        {
-                            Console.Write("Input a word: ");
-                            string addWord = Console.ReadLine();
-
-                            Console.Write("Input its meaning: ");
-                            string addMeaning = Console.ReadLine();
-
-                            Console.Write("Use it in a sentence: (Optional): ");
-                            string addSentence = Console.ReadLine();
-
-                            vocabularies.Add(addWord);
-                            vocabularies.Add(addMeaning);
-                            vocabularies.Add(addSentence);
-                            Console.WriteLine(addWord + " is added to ur list. \n");
-
-                            Console.Write("Add more? ");
-                            Console.WriteLine("Press [1] if u want to addd more, press any if u'r done. \n");
-                            add = Console.ReadLine();
-                        }
-                        while (add == "1");
-
-                    }
-                    else if (options == "2")
-                    {
-                        Console.WriteLine("List of all ur obtained vocabulary so far... \n");
-
-                        if (vocabularies.Count == 0)
-                        {
-                            Console.WriteLine("No results.");
-                        }
-                        else
-                        {
-                            for (int wordsList = 0; wordsList < vocabularies.Count; wordsList++)
-                            {
-                                Console.WriteLine(vocabularies[wordsList]);
-                            }
-                        }
-                    }
-                    else if (options == "3")
-                    {
-                        string remove;
-
-                        Console.WriteLine("Enter a word u want to remove: \n");
-                        string removeWord = Console.ReadLine();
-
-                        if (vocabularies.Contains(removeWord))
-                        {
-                            vocabularies.Remove(removeWord);
-                            Console.WriteLine(removeWord + " is removed. \n");
-                        }
-                    }
-                    else if (options == "4")
-                    {
-                        Console.WriteLine("App Closed.");
-                    }
-
-
-
-                } while (options != "4");
+                }
+                Console.WriteLine("\nAPP CLOSING...");
             }
-            
-            else 
+            else
             {
-                Console.WriteLine("Invaalid input username. ");
+                Console.WriteLine("Invalid input username.");
             }
+        }
+
+        public static void Option()
+        {
+            Console.WriteLine("-------------------------");
+            Console.WriteLine("\nPress a number (1-4) to get started:\n");
+            foreach (var choice in myOption)
+            {
+                Console.WriteLine(choice);
+            }
+        }
+
+        static int GetUserInput()
+        {
+            int userInput = Convert.ToInt16(Console.ReadLine());
+
+            return userInput;
+        }
+
+
+        static void AddWord()
+        {
+            string add;
+            do
+            {
+                Console.Write("\nInput a word: ");
+                string addWord = Console.ReadLine();
+
+                Console.Write("\nInput its meaning: ");
+                string addMeaning = Console.ReadLine();
+
+                Console.Write("\nUse it in a sentence (Optional): ");
+                string addSentence = Console.ReadLine();
+
+                vocabularies.Add("Word: " + addWord);
+                vocabularies.Add("Meaning: " +addMeaning);
+                vocabularies.Add("Sentence: " + addSentence);
+
+                Console.WriteLine("\nTHE WORD: "  + addWord + " HAS BEEN NOW ADDED TO YOUR LIST..\n");
+
+                Console.Write("\nAdd more? Type 'yes' to continue, or anything else to exit: ");
+                add = Console.ReadLine()?.Trim().ToLower();
+
+            } while (add == "yes");
+
+        }
+
+        static void ViewWord()
+        {
+            Console.WriteLine("\nLIST OF ALL YOUR OBTANAINED VOCABULARY SO FAR...\n");
+            if (vocabularies.Count == 0)
+            {
+                Console.WriteLine("No results.");
+            }
+            else
+            {
+                foreach (var word in vocabularies)
+                {
+                    Console.WriteLine(word  + "\n");
+                }
+            }
+        }
+
+        static void RemoveWord()
+        {
+            Console.Write("\nEnter a word you want to remove: ");
+            string removeWord = Console.ReadLine();
+
+            bool found = false;
+            for (int del = 0; del < vocabularies.Count; del++)
+            {
+                if (vocabularies[del].Contains("Word: " + removeWord))
+                {
+                    vocabularies.RemoveAt(del); 
+                    if (del < vocabularies.Count) vocabularies.RemoveAt(del); 
+                    if (del < vocabularies.Count) vocabularies.RemoveAt(del); 
+                    found = true;
+                    Console.WriteLine("\n" + removeWord + " HAS BEEN REMOVED.\n");
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                Console.WriteLine("\nWORD NOT FOUND IN YOUR LIST.\n");
+            }
+
+
         }
     }
 }
+
+
+
+
+

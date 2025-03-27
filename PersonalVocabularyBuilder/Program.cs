@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using BusinessDataLogic;
 
 namespace PersonalVocabularyBuilder
 {
     internal class Program
     {
-        static List<string> vocabularies = new List<string>();
+
         static string[] myOption =
         {
             "Press (1) to ADD A NEW VOCABULARY",
@@ -31,10 +32,8 @@ namespace PersonalVocabularyBuilder
                 Option();
                 int userOption = GetUserInput();
 
-                while (userOption != 4) 
+                while (userOption != 4)
                 {
-
-
                     switch (userOption)
                     {
                         case 1:
@@ -51,7 +50,7 @@ namespace PersonalVocabularyBuilder
 
                         case 4:
 
-                            return; 
+                            return;
 
                         default:
                             Console.WriteLine("\nInvalid option. Please select a valid number (1-4).\n");
@@ -81,13 +80,12 @@ namespace PersonalVocabularyBuilder
 
         static int GetUserInput()
         {
+            Console.WriteLine("\nInput: ");
             int userInput = Convert.ToInt16(Console.ReadLine());
-
             return userInput;
         }
 
-
-        static void AddWord()
+        static void AddWord() 
         {
             string add;
             do
@@ -100,32 +98,28 @@ namespace PersonalVocabularyBuilder
 
                 Console.Write("\nUse it in a sentence (Optional): ");
                 string addSentence = Console.ReadLine();
+                process.AddWord(addWord, addMeaning, addSentence);
 
-                vocabularies.Add("Word: " + addWord);
-                vocabularies.Add("Meaning: " +addMeaning);
-                vocabularies.Add("Sentence: " + addSentence);
-
-                Console.WriteLine("\nTHE WORD: "  + addWord + " HAS BEEN NOW ADDED TO YOUR LIST..\n");
+                Console.WriteLine("\nTHE WORD: " + addWord + " HAS BEEN NOW ADDED TO YOUR LIST..\n");
 
                 Console.Write("\nAdd more? Type 'yes' to continue, or anything else to exit: ");
                 add = Console.ReadLine()?.Trim().ToLower();
 
             } while (add == "yes");
-
         }
 
         static void ViewWord()
         {
             Console.WriteLine("\nLIST OF ALL YOUR OBTANAINED VOCABULARY SO FAR...\n");
-            if (vocabularies.Count == 0)
+            if (process.vocabularies.Count == 0)
             {
                 Console.WriteLine("No results.");
             }
             else
             {
-                foreach (var word in vocabularies)
+                foreach (var word in process.vocabularies)
                 {
-                    Console.WriteLine(word  + "\n");
+                    Console.WriteLine(word + "\n");
                 }
             }
         }
@@ -134,27 +128,9 @@ namespace PersonalVocabularyBuilder
         {
             Console.Write("\nEnter a word you want to remove: ");
             string removeWord = Console.ReadLine();
-
-            bool found = false;
-            for (int del = 0; del < vocabularies.Count; del++)
-            {
-                if (vocabularies[del].Contains("Word: " + removeWord))
-                {
-                    vocabularies.RemoveAt(del); 
-                    if (del < vocabularies.Count) vocabularies.RemoveAt(del); 
-                    if (del < vocabularies.Count) vocabularies.RemoveAt(del); 
-                    found = true;
-                    Console.WriteLine("\n" + removeWord + " HAS BEEN REMOVED.\n");
-                    break;
-                }
-            }
-
-            if (!found)
-            {
-                Console.WriteLine("\nWORD NOT FOUND IN YOUR LIST.\n");
-            }
-
-
+            Console.WriteLine("\n" + removeWord + " HAS BEEN REMOVED.\n");
+            process.RemoveWord(removeWord);
+            Console.WriteLine("\nWORD NOT FOUND IN YOUR LIST.\n");
         }
     }
 }

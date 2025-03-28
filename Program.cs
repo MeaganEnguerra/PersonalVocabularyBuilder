@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using BusinessDataLogic;
 
 namespace PersonalVocabularyBuilder
@@ -80,12 +81,12 @@ namespace PersonalVocabularyBuilder
 
         static int GetUserInput()
         {
-            Console.WriteLine("\nInput: ");
+            Console.Write("\nInput: ");
             int userInput = Convert.ToInt16(Console.ReadLine());
             return userInput;
         }
 
-        static void AddWord() 
+        static void AddWord()
         {
             string add;
             do
@@ -128,9 +129,15 @@ namespace PersonalVocabularyBuilder
         {
             Console.Write("\nEnter a word you want to remove: ");
             string removeWord = Console.ReadLine();
-            Console.WriteLine("\n" + removeWord + " HAS BEEN REMOVED.\n");
-            process.RemoveWord(removeWord);
-            Console.WriteLine("\nWORD NOT FOUND IN YOUR LIST.\n");
+            if (process.RemoveWord(removeWord))
+            {
+                Console.WriteLine("\n" + removeWord + " HAS BEEN REMOVED.\n");
+                process.RemoveWord(removeWord);
+            }
+            else
+            {
+                Console.WriteLine("\nWORD NOT FOUND IN YOUR LIST.\n");
+            }
         }
     }
 }

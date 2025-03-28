@@ -19,55 +19,58 @@ namespace PersonalVocabularyBuilder
 
         static void Main(string[] args)
         {
-            string name = "meagan";
-
             Console.WriteLine("Welcome to your Personal Vocabulary Builder!");
             Console.WriteLine("A simple app that helps you list and manage your vocabulary.\n");
 
-            Console.Write("Enter your username: ");
-            string userName = Console.ReadLine();
-
-            if (userName == name)
+            string userName;
+            do
             {
-                Console.WriteLine("\nHello, Meagan! What do you want to do?\n");
-                Option();
-                int userOption = GetUserInput();
+                Console.Write("\nEnter your username: ");
+                userName = Convert.ToString(Console.ReadLine());
 
-                while (userOption != 4)
+                if (!process.ValidateUserName(userName))
                 {
-                    switch (userOption)
-                    {
-                        case 1:
-                            AddWord();
-                            break;
-
-                        case 2:
-                            ViewWord();
-                            break;
-
-                        case 3:
-                            RemoveWord();
-                            break;
-
-                        case 4:
-
-                            return;
-
-                        default:
-                            Console.WriteLine("\nInvalid option. Please select a valid number (1-4).\n");
-                            break;
-                    }
-                    Option();
-                    userOption = GetUserInput();
-
+                    Console.WriteLine("\nIncorrect username. Please try again.");
                 }
-                Console.WriteLine("\nAPP CLOSING...");
-            }
-            else
+            } while (!process.ValidateUserName(userName));
+
+            Console.WriteLine("\nHello, Meagan! What do you want to do?\n");
+
+            Option();
+            int userOption = GetUserInput();
+
+            while (userOption != 4)
             {
-                Console.WriteLine("Invalid input username.");
+                switch (userOption)
+                {
+                    case 1:
+                        AddWord();
+                        break;
+
+                    case 2:
+                        ViewWord();
+                        break;
+
+                    case 3:
+                        RemoveWord();
+                        break;
+
+                    case 4:
+
+                        return;
+
+                    default:
+                        Console.WriteLine("\nInvalid option. Please select a valid number (1-4).\n");
+                        break;
+                }
+                Option();
+                userOption = GetUserInput();
+
             }
+            Console.WriteLine("\nAPP CLOSING...");
         }
+
+
 
         public static void Option()
         {
@@ -101,6 +104,7 @@ namespace PersonalVocabularyBuilder
                 string addSentence = Console.ReadLine();
                 process.AddWord(addWord, addMeaning, addSentence);
 
+                Console.WriteLine("-------------------------");
                 Console.WriteLine("\nTHE WORD: " + addWord + " HAS BEEN NOW ADDED TO YOUR LIST..\n");
 
                 Console.Write("\nAdd more? Type 'yes' to continue, or anything else to exit: ");
@@ -111,14 +115,17 @@ namespace PersonalVocabularyBuilder
 
         static void ViewWord()
         {
-            Console.WriteLine("\nLIST OF ALL YOUR OBTANAINED VOCABULARY SO FAR...\n");
+
             if (process.vocabularies.Count == 0)
             {
-                Console.WriteLine("No results.");
+                Console.WriteLine("-------------------------");
+                Console.WriteLine("\nNo results.");
             }
             else
             {
-                foreach (var word in process.vocabularies)
+                Console.WriteLine("-------------------------");
+                Console.WriteLine("\nLIST OF ALL YOUR OBTAINED VOCABULARY SO FAR...\n");
+                foreach (string word in process.vocabularies)
                 {
                     Console.WriteLine(word + "\n");
                 }
@@ -128,14 +135,16 @@ namespace PersonalVocabularyBuilder
         static void RemoveWord()
         {
             Console.Write("\nEnter a word you want to remove: ");
-            string removeWord = Console.ReadLine();
-            if (process.RemoveWord(removeWord))
+            string remove = Console.ReadLine();
+            if (process.RemoveWord(remove))
             {
-                Console.WriteLine("\n" + removeWord + " HAS BEEN REMOVED.\n");
-                process.RemoveWord(removeWord);
+                Console.WriteLine("-------------------------");
+                Console.WriteLine("\n" + remove + " HAS BEEN REMOVED.\n");
+                process.RemoveWord(remove);
             }
             else
             {
+                Console.WriteLine("-------------------------");
                 Console.WriteLine("\nWORD NOT FOUND IN YOUR LIST.\n");
             }
         }

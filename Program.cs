@@ -28,11 +28,11 @@ namespace PersonalVocabularyBuilder
                 Console.Write("\nEnter your username: ");
                 userName = Convert.ToString(Console.ReadLine());
 
-                if (!process.ValidateUserName(userName))
+                if (!VocabularyProcess.ValidateUserName(userName))
                 {
                     Console.WriteLine("\nIncorrect username. Please try again.");
                 }
-            } while (!process.ValidateUserName(userName));
+            } while (!VocabularyProcess.ValidateUserName(userName));
 
             Console.WriteLine("\nHello, Meagan! What do you want to do?\n");
 
@@ -102,7 +102,7 @@ namespace PersonalVocabularyBuilder
 
                 Console.Write("\nUse it in a sentence (Optional): ");
                 string addSentence = Console.ReadLine();
-                process.AddWord(addWord, addMeaning, addSentence);
+                VocabularyProcess.AddWord(addWord, addMeaning, addSentence);
 
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("\nTHE WORD: " + addWord + " HAS BEEN NOW ADDED TO YOUR LIST..\n");
@@ -116,7 +116,7 @@ namespace PersonalVocabularyBuilder
         static void ViewWord()
         {
 
-            if (process.vocabularies.Count == 0)
+            if (VocabularyProcess.vocabularies.Count == 0)
             {
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("\nNo results.");
@@ -125,7 +125,7 @@ namespace PersonalVocabularyBuilder
             {
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("\nLIST OF ALL YOUR OBTAINED VOCABULARY SO FAR...\n");
-                foreach (string word in process.vocabularies)
+                foreach (string word in VocabularyProcess.vocabularies)
                 {
                     Console.WriteLine(word + "\n");
                 }
@@ -136,11 +136,11 @@ namespace PersonalVocabularyBuilder
         {
             Console.Write("\nEnter a word you want to remove: ");
             string remove = Console.ReadLine();
-            if (process.RemoveWord(remove))
+            if (VocabularyProcess.RemoveWord(remove))
             {
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("\n" + remove + " HAS BEEN REMOVED.\n");
-                process.RemoveWord(remove);
+                VocabularyProcess.RemoveWord(remove);
             }
             else
             {

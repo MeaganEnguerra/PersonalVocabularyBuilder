@@ -5,7 +5,7 @@ using System.Net.NetworkInformation;
 
 namespace BusinessDataLogic
 {
-    public class process
+    public class VocabularyProcess
     {
         public static List<string> vocabularies = new List<string>();
         static string name = "meagan";
@@ -23,9 +23,9 @@ namespace BusinessDataLogic
                 if (vocabularies[del].Contains("Word: " + remove))
                 {
                     vocabularies.RemoveAt(del);
-                    if (del < vocabularies.Count) ;
+                    if (del < vocabularies.Count);
                     vocabularies.RemoveAt(del);
-                    if (del < vocabularies.Count) ;
+                    if (del < vocabularies.Count);
                     vocabularies.RemoveAt(del);
 
                     return true;

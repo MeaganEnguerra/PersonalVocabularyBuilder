@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156
+VisualStudioVersion = 17.13.35825.156 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVBDataLogic", "PVBDataLogic\PVBDataLogic.csproj", "{54BDD94D-4C01-6A4F-DF48-1FBD83A5A542}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyCommon", "VocabularyCommon\VocabularyCommon.csproj", "{E7E764BF-430E-1823-50D6-0FD145C9B4E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalVocabularyBuilder", "PersonalVocabularyBuilder.csproj", "{A5F8AAEF-A971-87CB-8BCE-279C697C1D71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVBBusinessLogic", "PVBBusinessLogic\PVBBusinessLogic.csproj", "{4DEC7147-CB8D-A74E-3812-5453C4F8E34D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalVocabularyBuilder", "..\BSIT 2-1 Second-Semester\Mock_Project\PersonalVocabularyBuilder.csproj", "{C7CF3DAB-0DC4-57CC-8D4E-89819A98E558}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVBDataLogic", "PVBDataLogic\PVBDataLogic.csproj", "{54BDD94D-4C01-6A4F-DF48-1FBD83A5A542}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocabularyCommon", "VocabularyCommon\VocabularyCommon.csproj", "{E7E764BF-430E-1823-50D6-0FD145C9B4E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +17,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5F8AAEF-A971-87CB-8BCE-279C697C1D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F8AAEF-A971-87CB-8BCE-279C697C1D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F8AAEF-A971-87CB-8BCE-279C697C1D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F8AAEF-A971-87CB-8BCE-279C697C1D71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DEC7147-CB8D-A74E-3812-5453C4F8E34D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEC7147-CB8D-A74E-3812-5453C4F8E34D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DEC7147-CB8D-A74E-3812-5453C4F8E34D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DEC7147-CB8D-A74E-3812-5453C4F8E34D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54BDD94D-4C01-6A4F-DF48-1FBD83A5A542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54BDD94D-4C01-6A4F-DF48-1FBD83A5A542}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54BDD94D-4C01-6A4F-DF48-1FBD83A5A542}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -25,19 +33,11 @@ Global
 		{E7E764BF-430E-1823-50D6-0FD145C9B4E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7E764BF-430E-1823-50D6-0FD145C9B4E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7E764BF-430E-1823-50D6-0FD145C9B4E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4DEC7147-CB8D-A74E-3812-5453C4F8E34D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4DEC7147-CB8D-A74E-3812-5453C4F8E34D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4DEC7147-CB8D-A74E-3812-5453C4F8E34D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4DEC7147-CB8D-A74E-3812-5453C4F8E34D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7CF3DAB-0DC4-57CC-8D4E-89819A98E558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7CF3DAB-0DC4-57CC-8D4E-89819A98E558}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7CF3DAB-0DC4-57CC-8D4E-89819A98E558}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7CF3DAB-0DC4-57CC-8D4E-89819A98E558}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AE9A710D-210C-4D29-AF7D-480293A75584}
+		SolutionGuid = {BF53D671-889C-4711-838A-DE7679083849}
 	EndGlobalSection
 EndGlobal

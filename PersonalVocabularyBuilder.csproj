@@ -9,12 +9,21 @@
 
   <ItemGroup>
     <Compile Remove="BusinessDataLogic\**" />
+    <Compile Remove="PVBBusinessLogic\**" />
+    <Compile Remove="PVBDataLogic\**" />
+    <Compile Remove="VocabularyCommon\**" />
     <EmbeddedResource Remove="BusinessDataLogic\**" />
+    <EmbeddedResource Remove="PVBBusinessLogic\**" />
+    <EmbeddedResource Remove="PVBDataLogic\**" />
+    <EmbeddedResource Remove="VocabularyCommon\**" />
     <None Remove="BusinessDataLogic\**" />
+    <None Remove="PVBBusinessLogic\**" />
+    <None Remove="PVBDataLogic\**" />
+    <None Remove="VocabularyCommon\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="BusinessDataLogic\BusinessDataLogic.csproj" />
+    <ProjectReference Include="PVBBusinessLogic\PVBBusinessLogic.csproj" />
   </ItemGroup>
 
 </Project>

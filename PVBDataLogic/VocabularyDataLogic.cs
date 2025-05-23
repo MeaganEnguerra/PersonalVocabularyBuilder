@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using VocabularyCommon;
@@ -10,6 +11,17 @@ namespace PVBDataLogic
 {
     public class VocabularyDataLogic
     {
+
+
+        IDataLogic datalogic;
+
+        public VocabularyDataLogic()
+        {
+            datalogic = new InMemoryData();
+            //movielibrarydata = new TextFileData();
+            //movielibrarydata = new JsonFileData();
+
+        }
 
         public  List<string> vocabularies = new List<string>();
         public void AddWord(string addWord, string addMeaning, string addSentence)
@@ -71,44 +83,15 @@ namespace PVBDataLogic
             return null;
         }
 
-
-
-        List<UserAccount> accounts = new List<UserAccount>();
-
-        public VocabularyDataLogic() 
+        public List<UserAccount> GetAllAccounts()
         {
-            AddUserAccount();
+            return datalogic.GetAccounts();
         }
 
-           private void AddUserAccount()
-        {
-            UserAccount account1 = new UserAccount();
-            account1.UserName = "meagan";
-            account1.Password = "1234";
-            accounts.Add(account1);
 
-            UserAccount account2 = new UserAccount();
-            account2.UserName = "mina";
-            account2.Password = "0000";
-            accounts.Add(account2);
 
-            UserAccount account3 = new UserAccount();
-            account3.UserName = "zy";
-            account3.Password = "1111";
-            accounts.Add(account3);
-        }
 
-        public bool ValidateVocabularyAccount(string userName, string passWord)
-        {
-            foreach (var account in accounts)
-            {
-                if (account.UserName == userName && account.Password == passWord)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        
 
     }
 }

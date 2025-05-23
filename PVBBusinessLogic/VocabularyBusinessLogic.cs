@@ -82,5 +82,17 @@ namespace PVBBusinessLogic
 
             return (meaning, word);
         }
+
+        public bool ValidateVocabularyAccount(string userName, string passWord)
+        {
+            foreach (var account in accounts)
+            {
+                if (account.UserName == userName && account.Password == passWord)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

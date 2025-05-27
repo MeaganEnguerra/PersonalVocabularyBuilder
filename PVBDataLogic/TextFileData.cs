@@ -8,7 +8,7 @@ using VocabularyCommon;
 
 namespace PVBDataLogic
 {
-    class TextFileData
+    public class TextFileData : IDataLogic
     {
         string filepath = "account.txt";
         List<UserAccount> userAccount = new List<UserAccount>();
@@ -46,18 +46,9 @@ namespace PVBDataLogic
             File.WriteAllLines(filepath, lines);
         }
 
-        //public int FindIndexWord(UserAccount account)
-        //{
-        //    for (int i = 0; i < bankAccounts.Count; i++)
-        //    {
-        //        if (userAccount[i].Number == account.Number)
-        //        {
-        //            return i;
-        //        }
-        //    }
+        
 
-        //    return -1;
-        //}
+
         public List<UserAccount> GetAccounts()
         {
             return userAccount;
@@ -68,7 +59,7 @@ namespace PVBDataLogic
             var newLine = account.UserName + "|" + account.Password;
 
             File.AppendAllText(filepath, newLine);
-            // WriteDataToFileAccount();
+          
         }
 
         public void RemoveAccount(UserAccount account, int password)

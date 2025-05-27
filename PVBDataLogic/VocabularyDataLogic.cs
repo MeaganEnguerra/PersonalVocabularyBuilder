@@ -86,12 +86,7 @@ namespace PVBDataLogic
         public List<UserAccount> GetAllAccounts()
         {
             return datalogic.GetAccounts();
-        }
-
-
-
-
-        
+        }    
 
     }
 }

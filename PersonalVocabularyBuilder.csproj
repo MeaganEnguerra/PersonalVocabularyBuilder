@@ -11,19 +11,30 @@
     <Compile Remove="BusinessDataLogic\**" />
     <Compile Remove="PVBBusinessLogic\**" />
     <Compile Remove="PVBDataLogic\**" />
+    <Compile Remove="PVBDesktop\**" />
+    <Compile Remove="VocabularyBuilder_API\**" />
     <Compile Remove="VocabularyCommon\**" />
     <EmbeddedResource Remove="BusinessDataLogic\**" />
     <EmbeddedResource Remove="PVBBusinessLogic\**" />
     <EmbeddedResource Remove="PVBDataLogic\**" />
+    <EmbeddedResource Remove="PVBDesktop\**" />
+    <EmbeddedResource Remove="VocabularyBuilder_API\**" />
     <EmbeddedResource Remove="VocabularyCommon\**" />
     <None Remove="BusinessDataLogic\**" />
     <None Remove="PVBBusinessLogic\**" />
     <None Remove="PVBDataLogic\**" />
+    <None Remove="PVBDesktop\**" />
+    <None Remove="VocabularyBuilder_API\**" />
     <None Remove="VocabularyCommon\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="PVBBusinessLogic\PVBBusinessLogic.csproj" />
+    <ProjectReference Include="VocabularyCommon\VocabularyCommon.csproj" />
   </ItemGroup>
 
 </Project>

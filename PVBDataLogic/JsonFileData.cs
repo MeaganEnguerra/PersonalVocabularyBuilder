@@ -10,36 +10,188 @@ namespace PVBDataLogic
 {
     public class JsonFileData : IDataLogic
     {
-        static List<UserAccount> userAccount = new List<UserAccount>();
-        static string jsonFilePath = "accounts.json";
+        List<UserAccount> accounts = new List<UserAccount>();
+        List<SetVocabulary> setVocabularies = new List<SetVocabulary>();
+        string jsonFilePathAccounts = "accounts.json";
+        string jsonFilePathVocabularies = "vocabularies.json";
 
         public JsonFileData()
         {
-            GetJsonDataFromFile();
+            GetDataFromAccounts();
+            GetDataFromVocabularies();
         }
 
-        private void GetJsonDataFromFile()
+        private void GetDataFromAccounts()
         {
-            string jsonText = File.ReadAllText(jsonFilePath);
+            string jsonText = File.ReadAllText(jsonFilePathAccounts);
 
-            userAccount = JsonSerializer.Deserialize<List<UserAccount>>(jsonText,
+            accounts = JsonSerializer.Deserialize<List<UserAccount>>(jsonText,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
             );
         }
 
-        private void WriteJsonDataToFile()
+        private void GetDataFromVocabularies()
         {
-            string jsonString = JsonSerializer.Serialize(userAccount, new JsonSerializerOptions
+            string jsonText = File.ReadAllText(jsonFilePathVocabularies);
+
+            setVocabularies = JsonSerializer.Deserialize<List<SetVocabulary>>(jsonText,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+            );
+        }
+
+        private void WriteDataToAccounts()
+        {
+            string jsonString = JsonSerializer.Serialize(accounts, new JsonSerializerOptions
             { WriteIndented = true });
 
-            File.WriteAllText(jsonFilePath, jsonString);
+            File.WriteAllText(jsonFilePathAccounts, jsonString);
         }
 
-        public void CreateAccount(UserAccount account,string userName, int password)
+        private void WriteDataToVocabularies()
         {
-            userAccount.Add(account);
-            WriteJsonDataToFile();
+            string jsonString = JsonSerializer.Serialize(setVocabularies, new JsonSerializerOptions
+            { WriteIndented = true });
+
+            File.WriteAllText(jsonFilePathVocabularies, jsonString);
         }
 
+        public int FindIndexOfAccounts(UserAccount account)
+        {
+            for (int index = 0; index < accounts.Count; index++)
+            {
+                if (accounts[index].Username == account.Username)
+                {
+                    return index;
+                }
+            }
+
+            return -1;
+        }
+
+        public int FindIndexOfVocabularies(string word)
+        {
+            for (int index = 0; index < setVocabularies.Count; index++)
+            {
+                if (setVocabularies[index].Word.Equals(word, StringComparison.OrdinalIgnoreCase))
+                {
+                    return index;
+                }
+            }
+
+            return -1;
+        }
+        public void CreateAccount(string userName, string passWord)
+        {
+
+            if (accounts.Any(a => a.Username.Equals(userName, StringComparison.OrdinalIgnoreCase)))
+            {
+                return;
+            }
+
+            UserAccount newAccount = new UserAccount()
+            {
+
+                Username = userName,
+                Password = passWord
+            };
+
+            accounts.Add(newAccount);
+            WriteDataToAccounts();
+        }
+
+        public List<UserAccount> GetAccounts()
+        {
+            return accounts;
+        }
+
+
+        public bool  DeleteAccount(string userName, string passWord)
+        {
+
+            var account = accounts.FirstOrDefault(a =>
+                a.Username.Equals(userName, StringComparison.OrdinalIgnoreCase) && a.Password == passWord);
+
+            if (account != null)
+            {
+                accounts.Remove(account);
+                WriteDataToAccounts();
+                return true;
+            }
+            return false;
+        }
+
+        public void AddWord(string word, string meaning, string sentence, string userName)
+        {
+            setVocabularies.Add(new SetVocabulary(word, meaning, sentence));
+            WriteDataToVocabularies();
+        }
+
+        public bool RemoveWord(string remove, string userName)
+        {
+            GetDataFromVocabularies();
+            remove = remove.Trim();
+            int index1 = -1;
+
+            for (int index2 = 0; index2 < setVocabularies.Count; index2++)
+            {
+                if (setVocabularies[index2].Word.Equals(remove, StringComparison.OrdinalIgnoreCase))
+                {
+                    index1 = 1;
+                    break;
+                    return true;
+                }
+            }
+            if (index1 != -1)
+            {
+                setVocabularies.RemoveAt(index1);
+                WriteDataToVocabularies();
+
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateWord(string oldWord, string newWord, string newMeaning, string newSentence, string userName)
+        {
+            var vocab = setVocabularies.FirstOrDefault(v =>
+            v.Word.Equals(oldWord, StringComparison.OrdinalIgnoreCase));
+
+            if (vocab != null)
+            {
+                
+                vocab.Word = newWord;
+                vocab.Meaning = newMeaning;
+                vocab.Sentence = newSentence;
+
+                WriteDataToVocabularies();
+
+                return true;
+            }
+            return false;
+        }
+
+        public SetVocabulary SearchWord(string search, string userName)
+        {
+            GetDataFromVocabularies();
+            foreach (var vocab in setVocabularies)
+            {
+                if (vocab.Word.Equals(search, StringComparison.OrdinalIgnoreCase))
+                {
+                    return vocab;
+                }
+            }
+            return null;
+        }
+
+        public List<SetVocabulary> GetAllWords(string userName)
+        {
+            GetDataFromVocabularies();
+            return setVocabularies;
+        }
+
+        public List<UserAccount> GetAllAccounts()
+        {
+            return accounts;
+        }
     }
 }

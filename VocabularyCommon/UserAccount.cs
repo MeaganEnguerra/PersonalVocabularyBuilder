@@ -7,23 +7,9 @@ using System.Threading.Tasks;
 namespace VocabularyCommon
 {
      public class UserAccount
-    {
-        private  string _defaultPIN = "1234";
-       
-        public string Password 
-        {
-            get { return _defaultPIN; }
-            set
-            {
-                if ((value.Length == 4 || value.Length == 6) && int.TryParse(value, out _) ) 
-                {
-                    _defaultPIN = value;
-                }
-            }
-        }
-
-        public string UserName { get; set; }
-       
+    {                
+        public string Username { get; set; }
+        public string Password { get; set; }
 
     }
 }

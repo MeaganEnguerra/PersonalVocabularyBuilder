@@ -3,47 +3,54 @@ using System.Data;
 using System.Globalization;
 using System.Net.NetworkInformation;
 using PVBDataLogic;
+using VocabularyCommon; 
 
 
 namespace PVBBusinessLogic
 {
     public class VocabularyBusinessLogic
     {
-        public VocabularyDataLogic vocabularyDataLogic = new VocabularyDataLogic();
+         VocabularyDataLogic vocabularyDataLogic = new VocabularyDataLogic();
 
-        public  void AddWord(string addWord, string addMeaning, string addSentence)
+        public  void AddWord(string addWord, string addMeaning, string addSentence, string userName)
         {
-             vocabularyDataLogic.AddWord (addWord, addMeaning, addSentence);
-        }
-
-        public bool RemoveWord (string remove)
-        {
-           return vocabularyDataLogic.RemoveWord (remove);
-        }
-        public  bool ValidateAccount (string userName, string passWord)
-        {
-            return vocabularyDataLogic.ValidateVocabularyAccount(userName, passWord);
+             vocabularyDataLogic.AddWord (addWord, addMeaning, addSentence, userName);
         }
 
-        public  bool UpdateWord(string oldWord, string newWord, string newMeaning, string newSentence)
+        public bool RemoveWord (string remove, string userName)
         {
-            return vocabularyDataLogic.UpdateWord(oldWord, newWord,newMeaning, newSentence);
+           return vocabularyDataLogic.RemoveWord (remove, userName);
+        }
+      
+        public  bool UpdateWord(string oldWord, string newWord, string newMeaning, string newSentence, string userName)
+        {
+            return vocabularyDataLogic.UpdateWord(oldWord, newWord,newMeaning, newSentence, userName);
         }
 
-        public  string SearchWord(string search)
+        public void CreateAccount(string userName, string passWord)
         {
-            return vocabularyDataLogic.SearchWord(search);
+             vocabularyDataLogic.CreateAccount(userName, passWord);
         }
 
-        public class SetVocabulary
+        public bool  DeleteAccount(string userName, string passWord)
         {
-            public static string Word { get; set; }
-            public static string Meaning { get; set; }
-            public static string Sentence { get; set; }
+            return vocabularyDataLogic.DeleteAccount(userName, passWord);
         }
+
+        public  SetVocabulary SearchWord(string search, string userName)
+        {
+            return vocabularyDataLogic.SearchWord(search, userName);
+        }
+
+        public List<SetVocabulary> GetAllWords(string userName)
+        {
+            return vocabularyDataLogic.GetAllWords(userName);
+        }
+
+      
         public class GameMode
         {
-         //i added this function-GameMode to maximize my project but it still have flows, need  more time to improve.
+       
             public static List<SetVocabulary> vocabularies = new List<SetVocabulary>();
             public static List<int> usedIndexes = new List<int>();
             public static Random randomMeaning = new Random();
@@ -53,7 +60,7 @@ namespace PVBBusinessLogic
                 if (vocabularies.Count == 0 || usedIndexes.Count == vocabularies.Count)
                     return null;
 
-                int index;
+                int index; 
                 do
                 {
                     index = randomMeaning.Next(vocabularies.Count);
@@ -69,30 +76,70 @@ namespace PVBBusinessLogic
             }
         }
 
-        public  (string Meaning, string Word) GetRandom()
+        public (string Meaning, string Word) GetRandom(string userName)
         {
+         
+            var allWords = vocabularyDataLogic.GetAllWords(userName);
 
-            if (vocabularyDataLogic.vocabularies.Count < 3)
-                return (null, null);
+            if (allWords.Count == 0 || GameMode.usedIndexes.Count == allWords.Count)
+                return (null, null); 
 
-            int index = GameMode.randomMeaning.Next(0, vocabularyDataLogic.vocabularies.Count / 3) * 3; //para ma-include pa yung index of word, meaniing, sentence
+            int index;
+            do
+            {
+                index = GameMode.randomMeaning.Next(allWords.Count);
+            } while (GameMode.usedIndexes.Contains(index)); 
 
-            string word = vocabularyDataLogic.vocabularies[index].Replace("Word: ", "");
-            string meaning = vocabularyDataLogic.vocabularies[index + 1].Replace("Meaning: ", "");
+            GameMode.usedIndexes.Add(index); 
 
-            return (meaning, word);
+            var selected = allWords[index];
+            return (selected.Meaning, selected.Word);
         }
+
 
         public bool ValidateVocabularyAccount(string userName, string passWord)
         {
-            foreach (var account in accounts)
+
+            userName = userName.Trim().ToLower();    
+            passWord = passWord.Trim();              
+
+
+            var account = GetAccount(userName, passWord);
+
+            if (account   != null)
             {
-                if (account.UserName == userName && account.Password == passWord)
-                {
-                    return true;
-                }
+                return true;
             }
+
             return false;
         }
+
+      
+
+        public UserAccount GetAccount(string userName, string passWord)
+        {
+            var Accounts = vocabularyDataLogic.GetAllAccounts();
+       
+            foreach (var account in Accounts)
+            {
+                if (account.Username.Trim() == userName.Trim() && account.Password.Trim() == passWord.Trim())
+                {
+                    return account; 
+                }
+            }
+            return null;
+        }
+
+        public bool ExistedAccounts(string userName)
+        {
+            var allAccounts = vocabularyDataLogic.GetAllAccounts();
+            return allAccounts.Any(acc => acc.Username.Equals(userName.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+
+        public List<UserAccount> GetAllAccounts()
+        {
+            return vocabularyDataLogic.GetAllAccounts();
+        }
+
     }
 }

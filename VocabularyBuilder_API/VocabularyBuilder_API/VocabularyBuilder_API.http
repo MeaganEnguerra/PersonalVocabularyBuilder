@@ -1,0 +1,6 @@
+@VocabularyBuilder_API_HostAddress = http://localhost:5087
+
+GET {{VocabularyBuilder_API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

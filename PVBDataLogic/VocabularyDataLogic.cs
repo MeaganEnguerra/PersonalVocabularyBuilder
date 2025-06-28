@@ -17,76 +17,55 @@ namespace PVBDataLogic
 
         public VocabularyDataLogic()
         {
-            datalogic = new InMemoryData();
-            //movielibrarydata = new TextFileData();
-            //movielibrarydata = new JsonFileData();
+           //datalogic = new InMemoryData();
+            //datalogic = new TextFileData();
+            //datalogic = new JsonFileData();
+           datalogic = new DBFile();
 
         }
 
-        public  List<string> vocabularies = new List<string>();
-        public void AddWord(string addWord, string addMeaning, string addSentence)
+        public void AddWord(string Word, string Meaning, string Sentence, string userName)
+        {           
+             datalogic.AddWord(Word, Meaning, Sentence, userName);
+        }
+
+        public bool RemoveWord(string remove, string userName)
         {
-            vocabularies.Add("Word: " + addWord);
-            vocabularies.Add("Meaning: " + addMeaning);
-            vocabularies.Add("Sentence: " + addSentence);
+            return datalogic.RemoveWord(remove, userName);
         }
 
-        public bool RemoveWord(string remove)
+        public SetVocabulary SearchWord(string search, string userName)
         {
-            for (int index = 0; index < vocabularies.Count; index++)
-            {
-                if (vocabularies[index].Contains("Word: " + remove))
-                {
-                    vocabularies.RemoveAt(index);
-                    if (index < vocabularies.Count) ;
-                    vocabularies.RemoveAt(index);
-                    if (index < vocabularies.Count) ;
-                    vocabularies.RemoveAt(index);
-
-                    return true;
-                }
-            }
-            return false;
+            return datalogic.SearchWord(search, userName);
         }
 
-        public bool UpdateWord(string oldWord, string newWord, string newMeaning, string newSentence)
+        public void CreateAccount(string userName, string passWord)
         {
-            for (int index = 0; index < vocabularies.Count; index++)
-            {
-                if (vocabularies[index].Contains("Word: " + oldWord))
-                {
-                    vocabularies[index] = "Word: " + newWord;
-                    if (index + 1 < vocabularies.Count)
-                        vocabularies[index + 1] = "Meaning: " + newMeaning;
-                    if (index + 2 < vocabularies.Count)
-                        vocabularies[index + 2] = "Sentence: " + newSentence;
-
-                    return true;
-                }
-            }
-            return false;
+            datalogic.CreateAccount(userName, passWord);
         }
 
-        public string SearchWord(string search)
+        public bool DeleteAccount(string userName, string passWord)
         {
-            for (int index = 0; index < vocabularies.Count; index++)
-            {
-                if (vocabularies[index].Contains("Word: " + search))
-                {
-                    string result = vocabularies[index] + "\n";
-                    if (index + 1 < vocabularies.Count)
-                        result += vocabularies[index + 1] + "\n";
-                    if (index + 2 < vocabularies.Count) result += vocabularies[index + 2];
-                    return result;
-                }
-            }
-            return null;
+            return datalogic.DeleteAccount(userName, passWord);
         }
+
 
         public List<UserAccount> GetAllAccounts()
         {
             return datalogic.GetAccounts();
-        }    
+        }
+      
+        public List<SetVocabulary> GetAllWords(string userName)
+        {
+            return datalogic.GetAllWords(userName);
+        }
+
+        public bool UpdateWord(string oldWord, string newWord, string newMeaning, string newSentence, string userName)
+        {
+            return datalogic.UpdateWord(oldWord, newWord, newMeaning, newSentence, userName);
+        }
+
+       
 
     }
 }

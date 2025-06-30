@@ -72,14 +72,14 @@ namespace PVBDesktop
             lblWord1.Text = lblMeaning1.Text = lblSentence1.Text = "";
             lblword2.Text = lblmeaning2.Text = lblSentence2.Text = "";
 
-            
+
             if (vocabList.Count > 0)
             {
                 lblWord1.Text = vocabList[0].Word;
                 lblMeaning1.Text = vocabList[0].Meaning;
                 lblSentence1.Text = vocabList[0].Sentence;
             }
-    
+
             if (vocabList.Count > 1)
             {
                 lblword2.Text = vocabList[1].Word;
@@ -131,7 +131,7 @@ namespace PVBDesktop
         }
 
         private void panelAccountSetting_Paint(object sender, PaintEventArgs e)
-        { 
+        {
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -361,6 +361,13 @@ namespace PVBDesktop
             panelUpdateWord.Visible = true;
 
             panelUpdateWord.BringToFront();
+        }
+
+        private void lblGameMode_Click(object sender, EventArgs e)
+        {
+            GameMode game = new GameMode();
+            game.Show();
+            this.Hide();
         }
     }
 }

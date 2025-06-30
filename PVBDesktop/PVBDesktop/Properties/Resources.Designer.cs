@@ -253,6 +253,26 @@ namespace PVBDesktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ekisss {
+            get {
+                object obj = ResourceManager.GetObject("ekisss", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ekisss1 {
+            get {
+                object obj = ResourceManager.GetObject("ekisss1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap f_log_in {
             get {
                 object obj = ResourceManager.GetObject("f log in", resourceCulture);
@@ -326,6 +346,16 @@ namespace PVBDesktop.Properties {
         internal static System.Drawing.Bitmap for_GUI {
             get {
                 object obj = ResourceManager.GetObject("for GUI", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GAMEMODE {
+            get {
+                object obj = ResourceManager.GetObject("GAMEMODE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

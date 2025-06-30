@@ -173,6 +173,7 @@
             lblGameMode.Size = new Size(183, 23);
             lblGameMode.TabIndex = 6;
             lblGameMode.Text = "Enter Game Mode!";
+            lblGameMode.Click += lblGameMode_Click;
             // 
             // lblUser2
             // 
@@ -258,7 +259,7 @@
             panelViewVocabularies.Controls.Add(lblWord1);
             panelViewVocabularies.Controls.Add(lblUser3);
             panelViewVocabularies.Controls.Add(btnSeeAll);
-            panelViewVocabularies.Location = new Point(326, 12);
+            panelViewVocabularies.Location = new Point(326, 7);
             panelViewVocabularies.Name = "panelViewVocabularies";
             panelViewVocabularies.Size = new Size(675, 525);
             panelViewVocabularies.TabIndex = 9;
@@ -376,7 +377,7 @@
             panelAddWord.Controls.Add(textBoxSentence);
             panelAddWord.Controls.Add(textBoxMeaning);
             panelAddWord.Controls.Add(textBoxWord);
-            panelAddWord.Location = new Point(282, 70);
+            panelAddWord.Location = new Point(286, 43);
             panelAddWord.Name = "panelAddWord";
             panelAddWord.Size = new Size(608, 471);
             panelAddWord.TabIndex = 10;
@@ -457,7 +458,7 @@
             panelDeleteAccount.Controls.Add(btnDelete);
             panelDeleteAccount.Controls.Add(txtboxpassword);
             panelDeleteAccount.Controls.Add(txtboxUsername);
-            panelDeleteAccount.Location = new Point(312, 29);
+            panelDeleteAccount.Location = new Point(312, 17);
             panelDeleteAccount.Name = "panelDeleteAccount";
             panelDeleteAccount.Size = new Size(561, 396);
             panelDeleteAccount.TabIndex = 10;
@@ -640,7 +641,7 @@
             panelUpdateWord.Controls.Add(textBoxNewSentence);
             panelUpdateWord.Controls.Add(textBoxNewMeaning);
             panelUpdateWord.Controls.Add(textBoxNewWord);
-            panelUpdateWord.Location = new Point(297, 54);
+            panelUpdateWord.Location = new Point(297, 27);
             panelUpdateWord.Name = "panelUpdateWord";
             panelUpdateWord.Size = new Size(528, 355);
             panelUpdateWord.TabIndex = 12;

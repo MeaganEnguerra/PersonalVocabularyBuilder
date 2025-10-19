@@ -3,14 +3,17 @@ using System.Data;
 using System.Globalization;
 using System.Net.NetworkInformation;
 using PVBDataLogic;
-using VocabularyCommon; 
+using VocabularyCommon;
+using EmailFunc;    
 
 
 namespace PVBBusinessLogic
 {
     public class VocabularyBusinessLogic
     {
-         VocabularyDataLogic vocabularyDataLogic = new VocabularyDataLogic();
+        VocabularyDataLogic vocabularyDataLogic = new VocabularyDataLogic();
+
+        EmailSMTP emailservice = new EmailSMTP();
 
         public  void AddWord(string addWord, string addMeaning, string addSentence, string userName)
         {
@@ -27,14 +30,15 @@ namespace PVBBusinessLogic
             return vocabularyDataLogic.UpdateWord(oldWord, newWord,newMeaning, newSentence, userName);
         }
 
-        public void CreateAccount(string userName, string passWord)
+        public void CreateAccount(string username, string password)
         {
-             vocabularyDataLogic.CreateAccount(userName, passWord);
+            vocabularyDataLogic.CreateAccount(username, password);
+            emailservice.SendEmail(username, password);
         }
 
-        public bool  DeleteAccount(string userName, string passWord)
+        public bool  DeleteAccount(string username, string password)
         {
-            return vocabularyDataLogic.DeleteAccount(userName, passWord);
+            return vocabularyDataLogic.DeleteAccount(username, password);
         }
 
         public  SetVocabulary SearchWord(string search, string userName)
@@ -74,6 +78,8 @@ namespace PVBBusinessLogic
             {
                 usedIndexes.Clear();
             }
+
+            
         }
 
         public (string Meaning, string Word) GetRandom(string userName)
@@ -97,14 +103,14 @@ namespace PVBBusinessLogic
         }
 
 
-        public bool ValidateVocabularyAccount(string userName, string passWord)
+        public bool ValidateVocabularyAccount(string username, string password)
         {
 
-            userName = userName.Trim().ToLower();    
-            passWord = passWord.Trim();              
+            username = username.Trim().ToLower();    
+            password = password.Trim();              
 
 
-            var account = GetAccount(userName, passWord);
+            var account = GetAccount(username, password);
 
             if (account   != null)
             {

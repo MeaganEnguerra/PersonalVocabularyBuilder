@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using VocabularyCommon;
 using PVBBusinessLogic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using EmailFunc;
 
 namespace PVBDesktop
 {
@@ -18,6 +19,7 @@ namespace PVBDesktop
         private Random random = new Random();
         private string username;
         private VocabularyBusinessLogic vocabularyBusinessLogic = new VocabularyBusinessLogic();
+       // private EmailService emailservice = new EmailService();
 
         public GameMode()
         {
@@ -106,6 +108,8 @@ namespace PVBDesktop
                MessageBoxIcon.Information);
 
             this.Close();
+
+            //emailservice.SendEmail(correctAnswers, incorrectAnswers);
         }
     }
 }

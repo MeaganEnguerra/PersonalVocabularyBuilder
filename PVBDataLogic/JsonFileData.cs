@@ -14,6 +14,7 @@ namespace PVBDataLogic
         List<SetVocabulary> setVocabularies = new List<SetVocabulary>();
         string jsonFilePathAccounts = "accounts.json";
         string jsonFilePathVocabularies = "vocabularies.json";
+       
 
         public JsonFileData()
         {
@@ -80,10 +81,10 @@ namespace PVBDataLogic
 
             return -1;
         }
-        public void CreateAccount(string userName, string passWord)
+        public void CreateAccount(string username, string password)
         {
 
-            if (accounts.Any(a => a.Username.Equals(userName, StringComparison.OrdinalIgnoreCase)))
+            if (accounts.Any(a => a.Username.Equals(username, StringComparison.OrdinalIgnoreCase)))
             {
                 return;
             }
@@ -91,8 +92,8 @@ namespace PVBDataLogic
             UserAccount newAccount = new UserAccount()
             {
 
-                Username = userName,
-                Password = passWord
+                Username = username,
+                Password = password
             };
 
             accounts.Add(newAccount);
@@ -105,11 +106,11 @@ namespace PVBDataLogic
         }
 
 
-        public bool  DeleteAccount(string userName, string passWord)
+        public bool  DeleteAccount(string username, string password)
         {
 
             var account = accounts.FirstOrDefault(a =>
-                a.Username.Equals(userName, StringComparison.OrdinalIgnoreCase) && a.Password == passWord);
+                a.Username.Equals(username, StringComparison.OrdinalIgnoreCase) && a.Password == password);
 
             if (account != null)
             {

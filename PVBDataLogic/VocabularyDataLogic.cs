@@ -20,7 +20,7 @@ namespace PVBDataLogic
            //datalogic = new InMemoryData();
             //datalogic = new TextFileData();
             //datalogic = new JsonFileData();
-           datalogic = new DBFile();
+           datalogic = new JsonFileData();
 
         }
 

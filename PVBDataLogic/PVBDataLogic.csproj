@@ -14,4 +14,10 @@
     <ProjectReference Include="..\VocabularyCommon\VocabularyCommon.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Email">
+      <HintPath>..\Email\Email\bin\Debug\net8.0\Email.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

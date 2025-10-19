@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Email">
+      <HintPath>..\..\Email\Email\bin\Debug\net8.0\Email.dll</HintPath>
+    </Reference>
     <Reference Include="PVBBusinessLogic">
       <HintPath>..\..\PVBBusinessLogic\bin\Debug\net8.0\PVBBusinessLogic.dll</HintPath>
     </Reference>

@@ -1,4 +1,5 @@
-
+using EmailFunc;
+using PVBBusinessLogic; 
 namespace VocabularyBuilder_API
 {
     public class Program
@@ -13,6 +14,11 @@ namespace VocabularyBuilder_API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+
+            builder.Services.AddScoped<EmailSMTP>();
+            builder.Services.AddScoped<PVBBusinessLogic.VocabularyBusinessLogic>();
+
 
             var app = builder.Build();
 

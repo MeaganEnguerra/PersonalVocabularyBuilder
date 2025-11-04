@@ -13,13 +13,13 @@ namespace PVBDataLogic
         List<UserAccount> accounts = new List<UserAccount>();
         List<SetVocabulary> setVocabularies = new List<SetVocabulary>();
         string jsonFilePathAccounts = "accounts.json";
-        string jsonFilePathVocabularies = "vocabularies.json";
+       // string jsonFilePathVocabularies = "vocabularies.json";
        
 
         public JsonFileData()
         {
             GetDataFromAccounts();
-            GetDataFromVocabularies();
+            //GetDataFromVocabularies();
         }
 
         private void GetDataFromAccounts()
@@ -31,14 +31,14 @@ namespace PVBDataLogic
             );
         }
 
-        private void GetDataFromVocabularies()
-        {
-            string jsonText = File.ReadAllText(jsonFilePathVocabularies);
+        //private void GetDataFromVocabularies()
+        //{
+        //    string jsonText = File.ReadAllText(jsonFilePathVocabularies);
 
-            setVocabularies = JsonSerializer.Deserialize<List<SetVocabulary>>(jsonText,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-            );
-        }
+        //    setVocabularies = JsonSerializer.Deserialize<List<SetVocabulary>>(jsonText,
+        //        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        //    );
+        //}
 
         private void WriteDataToAccounts()
         {
@@ -48,13 +48,13 @@ namespace PVBDataLogic
             File.WriteAllText(jsonFilePathAccounts, jsonString);
         }
 
-        private void WriteDataToVocabularies()
-        {
-            string jsonString = JsonSerializer.Serialize(setVocabularies, new JsonSerializerOptions
-            { WriteIndented = true });
+        //private void WriteDataToVocabularies()
+        //{
+        //    string jsonString = JsonSerializer.Serialize(setVocabularies, new JsonSerializerOptions
+        //    { WriteIndented = true });
 
-            File.WriteAllText(jsonFilePathVocabularies, jsonString);
-        }
+        //    File.WriteAllText(jsonFilePathVocabularies, jsonString);
+        //}
 
         public int FindIndexOfAccounts(UserAccount account)
         {
@@ -124,12 +124,12 @@ namespace PVBDataLogic
         public void AddWord(string word, string meaning, string sentence, string userName)
         {
             setVocabularies.Add(new SetVocabulary(word, meaning, sentence));
-            WriteDataToVocabularies();
+            //WriteDataToVocabularies();
         }
 
         public bool RemoveWord(string remove, string userName)
         {
-            GetDataFromVocabularies();
+           // GetDataFromVocabularies();
             remove = remove.Trim();
             int index1 = -1;
 
@@ -145,7 +145,7 @@ namespace PVBDataLogic
             if (index1 != -1)
             {
                 setVocabularies.RemoveAt(index1);
-                WriteDataToVocabularies();
+                //WriteDataToVocabularies();
 
                 return true;
             }
@@ -164,7 +164,7 @@ namespace PVBDataLogic
                 vocab.Meaning = newMeaning;
                 vocab.Sentence = newSentence;
 
-                WriteDataToVocabularies();
+                //WriteDataToVocabularies();
 
                 return true;
             }
@@ -173,7 +173,7 @@ namespace PVBDataLogic
 
         public SetVocabulary SearchWord(string search, string userName)
         {
-            GetDataFromVocabularies();
+            //GetDataFromVocabularies();
             foreach (var vocab in setVocabularies)
             {
                 if (vocab.Word.Equals(search, StringComparison.OrdinalIgnoreCase))
@@ -186,7 +186,7 @@ namespace PVBDataLogic
 
         public List<SetVocabulary> GetAllWords(string userName)
         {
-            GetDataFromVocabularies();
+            //GetDataFromVocabularies();
             return setVocabularies;
         }
 

@@ -6,7 +6,8 @@ using System.Diagnostics;
 using PVBBusinessLogic;
 using PVBDataLogic;
 using VocabularyCommon;
-
+using EmailFunc;
+using Microsoft.Extensions.Configuration;
 
 namespace PersonalVocabularyBuilder
 {
@@ -33,6 +34,7 @@ namespace PersonalVocabularyBuilder
             };
 
         static VocabularyBusinessLogic vocabularyBusinessLogic = new VocabularyBusinessLogic();
+        //static VocabularyBusinessLogic vocabularyBusinessLogic;
         static UserAccount activeUser;
         static bool loggedIn = false;
 

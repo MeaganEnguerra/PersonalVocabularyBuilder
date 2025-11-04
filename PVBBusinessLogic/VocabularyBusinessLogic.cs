@@ -4,16 +4,22 @@ using System.Globalization;
 using System.Net.NetworkInformation;
 using PVBDataLogic;
 using VocabularyCommon;
-using EmailFunc;    
-
+using EmailFunc;
+using Microsoft.Extensions.Configuration;
 
 namespace PVBBusinessLogic
 {
     public class VocabularyBusinessLogic
     {
         VocabularyDataLogic vocabularyDataLogic = new VocabularyDataLogic();
+    
 
-        EmailSMTP emailservice = new EmailSMTP();
+        private readonly EmailSMTP _emailService;
+
+        public VocabularyBusinessLogic(EmailSMTP emailService)
+        {
+            _emailService = emailService;
+        }
 
         public  void AddWord(string addWord, string addMeaning, string addSentence, string userName)
         {
@@ -33,7 +39,7 @@ namespace PVBBusinessLogic
         public void CreateAccount(string username, string password)
         {
             vocabularyDataLogic.CreateAccount(username, password);
-            emailservice.SendEmail(username, password);
+            _emailService.SendEmail(username, password);
         }
 
         public bool  DeleteAccount(string username, string password)

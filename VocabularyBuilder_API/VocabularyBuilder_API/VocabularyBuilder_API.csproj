@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,13 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.14.1" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.10" />
+    <PackageReference Include="MimeKit" Version="4.14.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="PVBBusinessLogic">
       <HintPath>..\..\PVBBusinessLogic\bin\Debug\net8.0\PVBBusinessLogic.dll</HintPath>
+    </Reference>
+    <Reference Include="PVBDataLogic">
+      <HintPath>..\..\PVBBusinessLogic\bin\Debug\net8.0\PVBDataLogic.dll</HintPath>
     </Reference>
     <Reference Include="VocabularyCommon">
       <HintPath>..\..\PVBBusinessLogic\bin\Debug\net8.0\VocabularyCommon.dll</HintPath>

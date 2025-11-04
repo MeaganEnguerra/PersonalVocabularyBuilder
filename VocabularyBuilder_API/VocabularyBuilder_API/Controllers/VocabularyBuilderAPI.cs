@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PVBBusinessLogic;
 using VocabularyCommon;
+using PVBDataLogic;
 
 namespace VocabularyBuilder_API.Controllers
 {
@@ -9,48 +10,55 @@ namespace VocabularyBuilder_API.Controllers
     [ApiController]
     public class VocabularyBuilderAPI : ControllerBase
     {
-        VocabularyBusinessLogic vocabularyBusinessLogic = new VocabularyBusinessLogic();
+        //VocabularyBusinessLogic vocabularyBusinessLogic = new VocabularyBusinessLogic();
+        private readonly PVBBusinessLogic.VocabularyBusinessLogic _vocabularyBusinessLogic;
+
+        public VocabularyBuilderAPI(PVBBusinessLogic.VocabularyBusinessLogic vocabularyBusinessLogic)
+        {
+            _vocabularyBusinessLogic = vocabularyBusinessLogic;
+        }
+
 
         [HttpGet("AddWord")]
         public void AddWord(string addWord, string addMeaning, string addSentence, string userName)
         {
-            vocabularyBusinessLogic.AddWord(addWord, addMeaning, addSentence, userName);
+            _vocabularyBusinessLogic.AddWord(addWord, addMeaning, addSentence, userName);
         }
 
         [HttpDelete("RemoveWord")]
         public bool RemoveWord(string remove, string userName)
         {
-            return vocabularyBusinessLogic.RemoveWord(remove, userName);
+            return _vocabularyBusinessLogic.RemoveWord(remove, userName);
         }
 
         [HttpPatch("UpdateWord")]
         public bool UpdateWord(string oldWord, string newWord, string newMeaning, string newSentence, string userName)
         {
-            return vocabularyBusinessLogic.UpdateWord(oldWord, newWord, newMeaning, newSentence, userName);
+            return _vocabularyBusinessLogic.UpdateWord(oldWord, newWord, newMeaning, newSentence, userName);
         }
 
         [HttpPost("CreateAccount")]
-        public void CreateAccount(string userName, string passWord)
+        public void CreateAccount(string username, string password)
         {
-            vocabularyBusinessLogic.CreateAccount(userName, passWord);
+            _vocabularyBusinessLogic.CreateAccount(username, password);
         }
 
         [HttpDelete("DeleteAccount")]
         public bool DeleteAccount(string userName, string passWord)
         {
-            return vocabularyBusinessLogic.DeleteAccount(userName, passWord);
+            return _vocabularyBusinessLogic.DeleteAccount(userName, passWord);
         }
 
         [HttpGet("SearchWord")]
         public SetVocabulary SearchWord(string search, string userName)
         {
-            return vocabularyBusinessLogic.SearchWord(search, userName);
+            return _vocabularyBusinessLogic.SearchWord(search, userName);
         }
 
         [HttpGet("GetAllWords")]
         public List<SetVocabulary> GetAllWords(string userName)
         {
-            return vocabularyBusinessLogic.GetAllWords(userName);
+            return _vocabularyBusinessLogic.GetAllWords(userName);
         }
 
         public class GameMode
@@ -85,7 +93,7 @@ namespace VocabularyBuilder_API.Controllers
         public (string Meaning, string Word) GetRandom(string userName)
         {
 
-            var allWords = vocabularyBusinessLogic.GetAllWords(userName);
+            var allWords = _vocabularyBusinessLogic.GetAllWords(userName);
 
             if (allWords.Count == 0 || GameMode.usedIndexes.Count == allWords.Count)
                 return (null, null);
@@ -103,14 +111,14 @@ namespace VocabularyBuilder_API.Controllers
         }
 
         [HttpGet("ValidateVocabularyAccount")]
-        public bool ValidateVocabularyAccount(string userName, string passWord)
+        public bool ValidateVocabularyAccount(string username, string password)
         {
 
-            userName = userName.Trim().ToLower();    
-            passWord = passWord.Trim();              
+            username = username.Trim().ToLower();
+            password = password.Trim();              
 
 
-            var account = GetAccount(userName, passWord);
+            var account = GetAccount(username, password);
 
             if (account   != null)
             {
@@ -123,7 +131,7 @@ namespace VocabularyBuilder_API.Controllers
         [HttpGet("GetAccount")]
         public UserAccount GetAccount(string userName, string passWord)
         {
-            var Accounts = vocabularyBusinessLogic.GetAllAccounts();
+            var Accounts = _vocabularyBusinessLogic.GetAllAccounts();
 
             foreach (var account in Accounts)
             {
@@ -139,7 +147,7 @@ namespace VocabularyBuilder_API.Controllers
         [HttpGet("ExistedAccounts")]
         public bool ExistedAccounts(string userName)
         {
-            var allAccounts = vocabularyBusinessLogic.GetAllAccounts();
+            var allAccounts = _vocabularyBusinessLogic.GetAllAccounts();
             return allAccounts.Any(acc => acc.Username.Equals(userName.Trim(), StringComparison.OrdinalIgnoreCase));
 
 
